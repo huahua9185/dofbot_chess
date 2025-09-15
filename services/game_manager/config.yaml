@@ -1,0 +1,52 @@
+# 游戏管理服务配置文件
+
+service:
+  name: "game_manager"
+  version: "1.0.0"
+  port: 8084
+  host: "0.0.0.0"
+
+# Redis配置
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null
+  connection_pool_size: 10
+
+# 游戏配置
+game:
+  # 游戏超时设置（秒）
+  move_timeout: 300          # 移动超时：5分钟
+  game_timeout: 3600         # 游戏超时：1小时
+  ai_thinking_timeout: 30    # AI思考超时：30秒
+
+  # 游戏清理设置
+  finished_game_cleanup_time: 3600  # 完成游戏清理时间：1小时
+
+  # AI设置
+  ai_difficulty_range: [1, 10]     # AI难度范围
+  default_ai_difficulty: 3         # 默认AI难度
+
+  # 玩家设置
+  default_time_control: 1800       # 默认时间控制：30分钟
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name}:{function}:{line} | {message}"
+  file: "logs/game_manager.log"
+  rotation: "100 MB"
+  retention: "30 days"
+  console: true
+
+# 监控配置
+monitoring:
+  metrics_enabled: true
+  health_check_interval: 30  # 健康检查间隔（秒）
+
+# 安全配置
+security:
+  enable_auth: false         # 是否启用认证
+  token_secret: "your-secret-key"
+  token_expire_hours: 24

@@ -1,0 +1,289 @@
+version: '3.8'
+
+services:
+  # 数据库服务
+  mongodb:
+    image: mongo:5.0
+    container_name: chess_robot_mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD:-chess_robot_admin}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE:-chess_robot}
+    ports:
+      - "${MONGODB_PORT:-27017}:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_log:/var/log/mongodb
+      - ./infrastructure/configs/mongodb/mongod.conf:/etc/mongod.conf:ro
+      - ./infrastructure/configs/mongodb/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    command: --config /etc/mongod.conf
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: ["CMD", "mongo", "--quiet", "--eval", "db.runCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: chess_robot_redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+      - ./infrastructure/configs/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # Web网关服务
+  web-gateway:
+    build:
+      context: .
+      dockerfile: services/web_gateway/Dockerfile
+    container_name: chess_robot_web_gateway
+    restart: unless-stopped
+    ports:
+      - "${WEB_GATEWAY_PORT:-8000}:8000"
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=${MONGODB_DATABASE:-chess_robot}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000}
+    volumes:
+      - ./services/web_gateway:/app
+      - ./shared:/app/shared
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # 游戏管理服务
+  game-manager:
+    build:
+      context: .
+      dockerfile: services/game_manager/Dockerfile
+    container_name: chess_robot_game_manager
+    restart: unless-stopped
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=${MONGODB_DATABASE:-chess_robot}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./services/game_manager:/app
+      - ./shared:/app/shared
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python -m game_manager.main
+
+  # AI引擎服务
+  ai-engine:
+    build:
+      context: .
+      dockerfile: services/ai_service/Dockerfile
+    container_name: chess_robot_ai_engine
+    restart: unless-stopped
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - STOCKFISH_PATH=${STOCKFISH_PATH:-/usr/bin/stockfish}
+      - STOCKFISH_THREADS=${STOCKFISH_THREADS:-2}
+      - STOCKFISH_MEMORY=${STOCKFISH_MEMORY:-512}
+    volumes:
+      - ./services/ai_service:/app
+      - ./shared:/app/shared
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python -m ai_service.main
+
+  # 视觉识别服务 (仅在有摄像头的情况下启动)
+  vision-service:
+    build:
+      context: .
+      dockerfile: services/vision_service/Dockerfile
+    container_name: chess_robot_vision
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - CAMERA_DEVICE=${CAMERA_DEVICE:-/dev/video0}
+      - CALIBRATION_DATA_PATH=/app/data/calibration
+    volumes:
+      - ./services/vision_service:/app
+      - ./shared:/app/shared
+      - ./data/calibration:/app/data/calibration
+      - /dev:/dev
+    devices:
+      - /dev/video0:/dev/video0
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python -m vision_service.main
+    profiles:
+      - hardware
+
+  # 机器人控制服务 (仅在有机械臂的情况下启动)
+  robot-service:
+    build:
+      context: .
+      dockerfile: services/robot_service/Dockerfile
+    container_name: chess_robot_controller
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - SERIAL_PORT=${SERIAL_PORT:-/dev/ttyACM0}
+      - SERIAL_BAUDRATE=${SERIAL_BAUDRATE:-115200}
+      - CALIBRATION_DATA_PATH=/app/data/calibration
+    volumes:
+      - ./services/robot_service:/app
+      - ./shared:/app/shared
+      - ./data/calibration:/app/data/calibration
+      - /dev:/dev
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python -m robot_service.main
+    profiles:
+      - hardware
+
+  # React前端
+  web-ui:
+    build:
+      context: ./web_ui
+      dockerfile: Dockerfile
+    container_name: chess_robot_web_ui
+    restart: unless-stopped
+    ports:
+      - "${WEB_UI_PORT:-3000}:3000"
+    environment:
+      - REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL:-http://localhost:8000}
+      - REACT_APP_WS_BASE_URL=${REACT_APP_WS_BASE_URL:-ws://localhost:8000}
+    volumes:
+      - ./web_ui:/app
+      - /app/node_modules
+    depends_on:
+      - web-gateway
+    networks:
+      - chess_robot_network
+    command: npm start
+
+  # Redis管理界面 (可选)
+  redis-insight:
+    image: redislabs/redisinsight:latest
+    container_name: chess_robot_redis_insight
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    networks:
+      - chess_robot_network
+    depends_on:
+      - redis
+    profiles:
+      - monitoring
+
+  # Prometheus监控 (可选)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: chess_robot_prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./infrastructure/configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - chess_robot_network
+    profiles:
+      - monitoring
+
+  # Grafana仪表板 (可选)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: chess_robot_grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infrastructure/configs/grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+    depends_on:
+      - prometheus
+    networks:
+      - chess_robot_network
+    profiles:
+      - monitoring
+
+networks:
+  chess_robot_network:
+    driver: bridge
+    name: chess_robot_network
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local

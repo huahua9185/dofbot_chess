@@ -1,0 +1,122 @@
+version: '3.8'
+
+services:
+  # 仅启动数据库和核心服务用于开发
+  mongodb:
+    extends:
+      file: docker-compose.yml
+      service: mongodb
+    ports:
+      - "27017:27017"
+
+  redis:
+    extends:
+      file: docker-compose.yml
+      service: redis
+    ports:
+      - "6379:6379"
+
+  # Web网关服务 - 开发模式
+  web-gateway:
+    build:
+      context: .
+      dockerfile: services/web_gateway/Dockerfile.dev
+    container_name: chess_robot_web_gateway_dev
+    restart: "no"
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=chess_robot_dev
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=DEBUG
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+      - DEVELOPMENT=true
+    volumes:
+      - ./services/web_gateway:/app
+      - ./shared:/app/shared
+      - ./data/logs:/app/logs
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+
+  # 游戏管理服务 - 开发模式
+  game-manager:
+    build:
+      context: .
+      dockerfile: services/game_manager/Dockerfile.dev
+    container_name: chess_robot_game_manager_dev
+    restart: "no"
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=chess_robot_dev
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=DEBUG
+      - DEVELOPMENT=true
+    volumes:
+      - ./services/game_manager:/app
+      - ./shared:/app/shared
+      - ./data/logs:/app/logs
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python -m game_manager.main --debug
+
+  # AI引擎服务 - 开发模式
+  ai-engine:
+    build:
+      context: .
+      dockerfile: services/ai_service/Dockerfile.dev
+    container_name: chess_robot_ai_engine_dev
+    restart: "no"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=DEBUG
+      - STOCKFISH_PATH=/usr/bin/stockfish
+      - STOCKFISH_THREADS=1
+      - STOCKFISH_MEMORY=256
+      - DEVELOPMENT=true
+    volumes:
+      - ./services/ai_service:/app
+      - ./shared:/app/shared
+      - ./data/logs:/app/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python -m ai_service.main --debug
+
+  # Redis管理界面
+  redis-insight:
+    extends:
+      file: docker-compose.yml
+      service: redis-insight
+
+networks:
+  chess_robot_network:
+    driver: bridge
+    name: chess_robot_network_dev
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local

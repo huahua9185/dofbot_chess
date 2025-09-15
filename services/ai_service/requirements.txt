@@ -1,0 +1,14 @@
+# Stockfish AI引擎服务依赖
+fastapi>=0.104.1
+uvicorn>=0.24.0
+redis>=5.0.1
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Chess引擎依赖
+chess>=1.9.4
+stockfish>=3.28.0
+
+# 测试依赖
+pytest>=7.4.3
+pytest-asyncio>=0.21.1

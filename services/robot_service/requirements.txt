@@ -1,0 +1,16 @@
+# DofBot Pro机器人控制服务依赖
+fastapi>=0.104.1
+uvicorn>=0.24.0
+redis>=5.0.1
+pyserial>=3.5
+numpy>=1.24.3
+scipy>=1.11.4
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# 数学计算
+sympy>=1.12
+
+# 测试依赖
+pytest>=7.4.3
+pytest-asyncio>=0.21.1

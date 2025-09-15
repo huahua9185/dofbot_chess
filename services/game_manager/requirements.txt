@@ -1,0 +1,7 @@
+asyncio
+redis==5.0.1
+python-chess==1.999
+pydantic==2.5.0
+pydantic-settings==2.1.0
+aioredis==2.0.1
+loguru==0.7.2
