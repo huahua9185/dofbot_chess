@@ -4,7 +4,6 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  Box,
   Chip,
   Badge,
 } from '@mui/material';
@@ -75,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
           智能象棋机器人
         </Typography>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           {/* 连接状态指示器 */}
           <Chip
             label={`游戏: ${getConnectionStatusText()}`}
@@ -123,7 +122,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
           <IconButton color="inherit" size="small">
             <AccountCircle />
           </IconButton>
-        </Box>
+        </div>
       </Toolbar>
     </AppBar>
   );

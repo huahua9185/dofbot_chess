@@ -1,0 +1,151 @@
+# 智能象棋机器人认证系统
+# 包含认证服务和相关基础设施
+
+version: '3.8'
+
+networks:
+  chess_auth:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/16
+
+volumes:
+  mongodb_auth_data:
+    driver: local
+  redis_auth_data:
+    driver: local
+
+services:
+  # MongoDB数据库（用于用户和权限存储）
+  mongodb_auth:
+    image: mongo:6.0
+    container_name: chess_mongodb_auth
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_auth_data:/data/db
+      - ./mongodb/init-auth.js:/docker-entrypoint-initdb.d/init-auth.js:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=ChessRobotAuth2024
+      - MONGO_INITDB_DATABASE=chess_robot_auth
+      - TZ=Asia/Shanghai
+    networks:
+      - chess_auth
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ismaster')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Redis缓存（用于会话和令牌黑名单）
+  redis_auth:
+    image: redis:7.0-alpine
+    container_name: chess_redis_auth
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_auth_data:/data
+      - ./redis/redis-auth.conf:/usr/local/etc/redis/redis.conf:ro
+    command: redis-server /usr/local/etc/redis/redis.conf
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - chess_auth
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # 认证服务
+  auth_service:
+    build:
+      context: ../services/auth_service
+      dockerfile: Dockerfile
+    container_name: chess_auth_service
+    restart: unless-stopped
+    ports:
+      - "8006:8006"
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+      - JWT_SECRET_KEY=ChessRobot2024SuperSecretJWTKey
+      - MONGODB_HOST=mongodb_auth
+      - MONGODB_PORT=27017
+      - MONGODB_USERNAME=auth_user
+      - MONGODB_PASSWORD=auth_pass_2024
+      - REDIS_HOST=redis_auth
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis_auth_2024
+      - DEFAULT_ADMIN_USERNAME=admin
+      - DEFAULT_ADMIN_PASSWORD=ChessRobotAdmin2024!
+      - DEFAULT_ADMIN_EMAIL=admin@chessrobot.local
+    volumes:
+      - ../shared:/app/shared:ro
+      - ../logs:/app/logs
+    networks:
+      - chess_auth
+    depends_on:
+      mongodb_auth:
+        condition: service_healthy
+      redis_auth:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8006/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Web网关服务（集成认证）
+  web_gateway_auth:
+    build:
+      context: ../services/web_gateway
+      dockerfile: Dockerfile
+    container_name: chess_web_gateway_auth
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+      - JWT_SECRET_KEY=ChessRobot2024SuperSecretJWTKey
+      - AUTH_SERVICE_URL=http://auth_service:8006
+      - MONGODB_HOST=mongodb_auth
+      - MONGODB_PORT=27017
+    volumes:
+      - ../shared:/app/shared:ro
+      - ../logs:/app/logs
+    networks:
+      - chess_auth
+    depends_on:
+      auth_service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 认证管理界面（可选）
+  auth_admin:
+    build:
+      context: ./auth_admin
+      dockerfile: Dockerfile
+    container_name: chess_auth_admin
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - REACT_APP_AUTH_API_URL=http://localhost:8006
+      - REACT_APP_GATEWAY_API_URL=http://localhost:8001
+    networks:
+      - chess_auth
+    depends_on:
+      - auth_service
+      - web_gateway_auth

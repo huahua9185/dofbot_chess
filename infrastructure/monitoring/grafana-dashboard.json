@@ -1,0 +1,287 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "智能象棋机器人监控仪表板",
+    "tags": ["chess", "robot", "monitoring"],
+    "style": "dark",
+    "timezone": "browser",
+    "editable": true,
+    "hideControls": false,
+    "graphTooltip": 1,
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": ["5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"],
+      "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"]
+    },
+    "refresh": "5s",
+    "panels": [
+      {
+        "id": 1,
+        "title": "系统概览",
+        "type": "stat",
+        "gridPos": {"h": 6, "w": 24, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "up",
+            "legendFormat": "{{job}} - {{instance}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "displayName": "服务状态",
+            "unit": "short",
+            "min": 0,
+            "max": 1
+          }
+        },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "horizontal"
+        }
+      },
+      {
+        "id": 2,
+        "title": "CPU使用率",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 6},
+        "targets": [
+          {
+            "expr": "100 - (avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+            "legendFormat": "CPU使用率 - {{instance}}",
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "百分比 (%)",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "alert": {
+          "conditions": [
+            {
+              "query": {"queryType": "", "refId": "A"},
+              "reducer": {"type": "avg"},
+              "evaluator": {"params": [80], "type": "gt"}
+            }
+          ],
+          "executionErrorState": "alerting",
+          "for": "2m",
+          "frequency": "10s",
+          "handler": 1,
+          "name": "CPU使用率告警",
+          "noDataState": "no_data"
+        }
+      },
+      {
+        "id": 3,
+        "title": "内存使用率",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 6},
+        "targets": [
+          {
+            "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100",
+            "legendFormat": "内存使用率 - {{instance}}",
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "百分比 (%)",
+            "min": 0,
+            "max": 100
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "视觉处理指标",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 8, "x": 0, "y": 14},
+        "targets": [
+          {
+            "expr": "chess_vision_fps",
+            "legendFormat": "视觉FPS",
+            "refId": "A"
+          },
+          {
+            "expr": "chess_detection_confidence",
+            "legendFormat": "检测置信度",
+            "refId": "B"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "FPS / 置信度",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "机器人控制指标",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 8, "x": 8, "y": 14},
+        "targets": [
+          {
+            "expr": "chess_robot_response_time",
+            "legendFormat": "响应时间(s)",
+            "refId": "A"
+          },
+          {
+            "expr": "chess_robot_position_error",
+            "legendFormat": "定位误差(mm)",
+            "refId": "B"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "时间(s) / 误差(mm)",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "AI引擎指标",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 8, "x": 16, "y": 14},
+        "targets": [
+          {
+            "expr": "chess_ai_thinking_time",
+            "legendFormat": "思考时间(s)",
+            "refId": "A"
+          },
+          {
+            "expr": "chess_ai_evaluation_score",
+            "legendFormat": "评估分数",
+            "refId": "B"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "时间(s) / 分数",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "游戏统计",
+        "type": "stat",
+        "gridPos": {"h": 6, "w": 12, "x": 0, "y": 22},
+        "targets": [
+          {
+            "expr": "chess_active_games_count",
+            "legendFormat": "活跃游戏数",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(chess_game_operations_total[5m]) * 60",
+            "legendFormat": "操作/分钟",
+            "refId": "B"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "palette-classic"},
+            "unit": "short"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "网络流量",
+        "type": "graph",
+        "gridPos": {"h": 6, "w": 12, "x": 12, "y": 22},
+        "targets": [
+          {
+            "expr": "rate(node_network_receive_bytes_total[5m]) * 8",
+            "legendFormat": "接收 {{device}}",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(node_network_transmit_bytes_total[5m]) * 8",
+            "legendFormat": "发送 {{device}}",
+            "refId": "B"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "比特/秒",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "错误率统计",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 28},
+        "targets": [
+          {
+            "expr": "rate(chess_game_errors_total[5m])",
+            "legendFormat": "游戏错误/秒",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(http_requests_total{status=~\"5..\"}[5m])",
+            "legendFormat": "HTTP 5xx错误/秒",
+            "refId": "B"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "错误/秒",
+            "min": 0
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "设备温度监控",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 28},
+        "targets": [
+          {
+            "expr": "chess_device_temperature",
+            "legendFormat": "{{device}} 温度",
+            "refId": "A"
+          },
+          {
+            "expr": "node_thermal_zone_temp",
+            "legendFormat": "系统温度 {{zone}}",
+            "refId": "B"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "温度 (°C)",
+            "min": 0,
+            "max": 100
+          }
+        ],
+        "thresholds": [
+          {
+            "value": 70,
+            "colorMode": "warning",
+            "op": "gt"
+          },
+          {
+            "value": 80,
+            "colorMode": "critical",
+            "op": "gt"
+          }
+        ]
+      }
+    ]
+  }
+}

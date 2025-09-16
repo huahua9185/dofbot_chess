@@ -1,0 +1,137 @@
+# 智能象棋机器人日志系统
+# ELK Stack + Fluent Bit
+
+version: '3.8'
+
+networks:
+  logging:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+
+volumes:
+  elasticsearch_data:
+    driver: local
+  kibana_data:
+    driver: local
+
+services:
+  # Elasticsearch - 日志搜索和分析引擎
+  elasticsearch:
+    image: elasticsearch:7.17.0
+    container_name: chess_elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - logging
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # Kibana - 日志可视化界面
+  kibana:
+    image: kibana:7.17.0
+    container_name: chess_kibana
+    restart: unless-stopped
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - SERVER_NAME=kibana
+      - SERVER_HOST=0.0.0.0
+    ports:
+      - "5601:5601"
+    volumes:
+      - kibana_data:/usr/share/kibana/data
+    networks:
+      - logging
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5601/api/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # Fluent Bit - 轻量级日志收集器
+  fluent-bit:
+    image: fluent/fluent-bit:2.2
+    container_name: chess_fluent_bit
+    restart: unless-stopped
+    ports:
+      - "24224:24224"
+      - "2020:2020"
+    volumes:
+      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf:ro
+      - ./parsers.conf:/fluent-bit/etc/parsers.conf:ro
+      - /home/jetson/prog/logs:/var/log/chess:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - logging
+    depends_on:
+      - elasticsearch
+    environment:
+      - FLB_ES_HOST=elasticsearch
+      - FLB_ES_PORT=9200
+
+  # Logstash - 日志处理管道（可选）
+  logstash:
+    image: logstash:7.17.0
+    container_name: chess_logstash
+    restart: unless-stopped
+    ports:
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+      - ./logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+    networks:
+      - logging
+    depends_on:
+      - elasticsearch
+    environment:
+      - LS_JAVA_OPTS=-Xmx256m -Xms256m
+
+  # 自定义日志分析服务
+  log_analyzer:
+    build:
+      context: .
+      dockerfile: Dockerfile.log-analyzer
+    container_name: chess_log_analyzer
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    volumes:
+      - /home/jetson/prog/logs:/app/logs:ro
+      - /home/jetson/prog/config:/app/config:ro
+    networks:
+      - logging
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+    depends_on:
+      - elasticsearch
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

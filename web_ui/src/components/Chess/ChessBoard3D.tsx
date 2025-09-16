@@ -330,10 +330,13 @@ const ChessBoard3D: React.FC<ChessBoard3DProps> = ({
     return coordinates;
   };
 
+  const containerStyle = { width: size, height: size + 100 };
+  const controlPanelStyle = { mb: 2, display: 'flex', gap: 2, alignItems: 'center' };
+
   return (
-    <MuiBox sx={{ width: size, height: size + 100 }}>
+    <MuiBox sx={containerStyle}>
       {/* 控制面板 */}
-      <MuiBox sx={{ mb: 2, display: 'flex', gap: 2, alignItems: 'center' }}>
+      <MuiBox sx={controlPanelStyle}>
         <FormControlLabel
           control={
             <Switch

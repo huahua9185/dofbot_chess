@@ -1,0 +1,165 @@
+# Prometheus配置文件
+# 智能象棋机器人监控系统
+
+global:
+  scrape_interval: 15s      # 默认采集间隔
+  evaluation_interval: 15s  # 规则评估间隔
+  external_labels:
+    monitor: 'chess_robot_monitor'
+    environment: 'production'
+
+# 告警管理配置
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+# 加载告警规则
+rule_files:
+  - "alert_rules.yml"
+
+# 采集配置
+scrape_configs:
+  # Prometheus自监控
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+
+  # 系统指标监控 (Node Exporter)
+  - job_name: 'system'
+    static_configs:
+      - targets: ['localhost:9100']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+    scrape_timeout: 10s
+
+  # Web网关服务监控
+  - job_name: 'web_gateway'
+    static_configs:
+      - targets: ['localhost:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    labels:
+      service: 'web_gateway'
+      component: 'api'
+
+  # 视觉识别服务监控
+  - job_name: 'vision_service'
+    static_configs:
+      - targets: ['localhost:8001']
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    labels:
+      service: 'vision_service'
+      component: 'detection'
+
+  # 机器人控制服务监控
+  - job_name: 'robot_service'
+    static_configs:
+      - targets: ['localhost:8002']
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    labels:
+      service: 'robot_service'
+      component: 'control'
+
+  # AI引擎服务监控
+  - job_name: 'ai_service'
+    static_configs:
+      - targets: ['localhost:8003']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+    scrape_timeout: 10s
+    labels:
+      service: 'ai_service'
+      component: 'engine'
+
+  # 游戏管理服务监控
+  - job_name: 'game_manager'
+    static_configs:
+      - targets: ['localhost:8004']
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    labels:
+      service: 'game_manager'
+      component: 'state'
+
+  # 标定服务监控
+  - job_name: 'calibration_service'
+    static_configs:
+      - targets: ['localhost:8005']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    labels:
+      service: 'calibration_service'
+      component: 'hardware'
+
+  # Redis监控
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['localhost:6379']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+    scrape_timeout: 10s
+    labels:
+      service: 'redis'
+      component: 'database'
+
+  # MongoDB监控
+  - job_name: 'mongodb'
+    static_configs:
+      - targets: ['localhost:27017']
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    labels:
+      service: 'mongodb'
+      component: 'database'
+
+  # 硬件设备监控 (自定义)
+  - job_name: 'hardware_devices'
+    static_configs:
+      - targets: ['localhost:9200']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+    scrape_timeout: 15s
+    labels:
+      service: 'hardware'
+      component: 'devices'
+
+  # 网络设备监控 (SNMP)
+  - job_name: 'network_devices'
+    static_configs:
+      - targets: ['192.168.1.1:161']  # 路由器
+    metrics_path: '/snmp'
+    scrape_interval: 60s
+    scrape_timeout: 30s
+    params:
+      module: [if_mib]
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:9116  # SNMP exporter地址
+
+# 远程存储配置 (可选)
+# remote_write:
+#   - url: "http://remote-prometheus:9090/api/v1/write"
+#     write_relabel_configs:
+#       - source_labels: [__name__]
+#         regex: 'chess_.*'
+#         action: keep
+
+# 远程读取配置 (可选)
+# remote_read:
+#   - url: "http://remote-prometheus:9090/api/v1/read"

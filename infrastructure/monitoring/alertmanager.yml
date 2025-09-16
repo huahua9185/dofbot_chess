@@ -1,0 +1,220 @@
+# AlertManager告警配置
+# 智能象棋机器人告警通知系统
+
+global:
+  # 全局SMTP配置
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'chess-robot-alerts@gmail.com'
+  smtp_auth_username: 'chess-robot-alerts@gmail.com'
+  smtp_auth_password: 'your-app-password'
+  smtp_require_tls: true
+
+  # 全局配置
+  resolve_timeout: 5m
+  http_config:
+    tls_config:
+      insecure_skip_verify: true
+
+# 路由规则
+route:
+  group_by: ['severity', 'service']
+  group_wait: 10s      # 等待时间，收集同组告警
+  group_interval: 10s  # 同组内告警发送间隔
+  repeat_interval: 1h  # 重复告警间隔
+  receiver: 'default'  # 默认接收者
+
+  # 子路由规则
+  routes:
+    # 严重告警立即发送
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      group_wait: 0s
+      group_interval: 5s
+      repeat_interval: 15m
+
+    # 系统告警
+    - match:
+        service: system
+      receiver: 'system-alerts'
+      group_interval: 30s
+      repeat_interval: 2h
+
+    # 服务告警
+    - match_re:
+        service: '(vision_service|robot_service|ai_service)'
+      receiver: 'service-alerts'
+      group_interval: 15s
+      repeat_interval: 1h
+
+    # 数据库告警
+    - match_re:
+        service: '(redis|mongodb)'
+      receiver: 'database-alerts'
+      group_interval: 30s
+      repeat_interval: 2h
+
+    # 硬件告警
+    - match:
+        service: hardware
+      receiver: 'hardware-alerts'
+      group_wait: 5s
+      group_interval: 10s
+      repeat_interval: 30m
+
+# 抑制规则
+inhibit_rules:
+  # 如果服务下线，抑制其他相关告警
+  - source_match:
+      alertname: 'ServiceDown'
+    target_match_re:
+      service: '.*'
+    equal: ['instance']
+
+  # 如果CPU使用率过高，抑制内存告警
+  - source_match:
+      alertname: 'HighCPUUsage'
+    target_match:
+      alertname: 'HighMemoryUsage'
+    equal: ['instance']
+
+# 接收者配置
+receivers:
+  # 默认接收者
+  - name: 'default'
+    webhook_configs:
+      - url: 'http://localhost:8000/api/alerts/webhook'
+        send_resolved: true
+        http_config:
+          tls_config:
+            insecure_skip_verify: true
+
+  # 严重告警接收者
+  - name: 'critical-alerts'
+    email_configs:
+      - to: 'admin@chessrobot.local'
+        subject: '🚨 严重告警 - 象棋机器人系统'
+        body: |
+          严重告警触发！
+
+          告警名称: {{ .GroupLabels.alertname }}
+          服务: {{ .GroupLabels.service }}
+          严重程度: {{ .GroupLabels.severity }}
+
+          详细信息:
+          {{ range .Alerts }}
+          - 告警: {{ .Annotations.summary }}
+          - 描述: {{ .Annotations.description }}
+          - 实例: {{ .Labels.instance }}
+          - 时间: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+
+          请立即检查系统状态！
+        headers:
+          Subject: '🚨 象棋机器人严重告警'
+
+    webhook_configs:
+      - url: 'http://localhost:8000/api/alerts/critical'
+        send_resolved: true
+
+    # 短信通知 (需要配置短信服务)
+    # sms_configs:
+    #   - api_url: 'https://api.sms-service.com/send'
+    #     to: '+86138xxxxxxxx'
+    #     message: '象棋机器人严重告警: {{ .GroupLabels.alertname }}'
+
+  # 系统告警接收者
+  - name: 'system-alerts'
+    email_configs:
+      - to: 'sysadmin@chessrobot.local'
+        subject: '⚠️ 系统告警 - {{ .GroupLabels.alertname }}'
+        body: |
+          系统告警通知
+
+          告警: {{ .GroupLabels.alertname }}
+          服务器: {{ .GroupLabels.instance }}
+
+          {{ range .Alerts }}
+          - {{ .Annotations.summary }}
+          - {{ .Annotations.description }}
+          {{ end }}
+
+          时间: {{ .CommonLabels.alertname }}
+
+    webhook_configs:
+      - url: 'http://localhost:8000/api/alerts/system'
+        send_resolved: true
+
+  # 服务告警接收者
+  - name: 'service-alerts'
+    email_configs:
+      - to: 'developer@chessrobot.local'
+        subject: '🔧 服务告警 - {{ .GroupLabels.service }}'
+        body: |
+          服务告警通知
+
+          服务: {{ .GroupLabels.service }}
+          告警: {{ .GroupLabels.alertname }}
+
+          {{ range .Alerts }}
+          - {{ .Annotations.summary }}
+          - {{ .Annotations.description }}
+          - 实例: {{ .Labels.instance }}
+          {{ end }}
+
+    webhook_configs:
+      - url: 'http://localhost:8000/api/alerts/service'
+        send_resolved: true
+
+    # Slack通知 (需要配置Slack webhook)
+    # slack_configs:
+    #   - api_url: 'https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK'
+    #     channel: '#alerts'
+    #     title: '服务告警 - {{ .GroupLabels.service }}'
+    #     text: '{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}'
+
+  # 数据库告警接收者
+  - name: 'database-alerts'
+    email_configs:
+      - to: 'dba@chessrobot.local'
+        subject: '💾 数据库告警 - {{ .GroupLabels.service }}'
+        body: |
+          数据库告警通知
+
+          数据库: {{ .GroupLabels.service }}
+          告警: {{ .GroupLabels.alertname }}
+
+          {{ range .Alerts }}
+          - {{ .Annotations.summary }}
+          - {{ .Annotations.description }}
+          {{ end }}
+
+    webhook_configs:
+      - url: 'http://localhost:8000/api/alerts/database'
+        send_resolved: true
+
+  # 硬件告警接收者
+  - name: 'hardware-alerts'
+    email_configs:
+      - to: 'hardware@chessrobot.local'
+        subject: '🔩 硬件告警 - {{ .GroupLabels.alertname }}'
+        body: |
+          硬件设备告警
+
+          设备: {{ .CommonLabels.device }}
+          告警: {{ .GroupLabels.alertname }}
+
+          {{ range .Alerts }}
+          - {{ .Annotations.summary }}
+          - {{ .Annotations.description }}
+          {{ end }}
+
+          请检查硬件设备状态！
+
+    webhook_configs:
+      - url: 'http://localhost:8000/api/alerts/hardware'
+        send_resolved: true
+
+# 模板配置
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'

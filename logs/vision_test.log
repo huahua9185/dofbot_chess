@@ -1,0 +1,374 @@
+{"service": "vision_test", "level": "info", "event": "\u65e5\u5fd7\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "logger": "vision_test", "timestamp": "2025-09-15T14:14:07.572586Z"}
+{"event": "\u5f00\u59cb\u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5\u5957\u4ef6", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:07.573362Z"}
+{"event": "\u8fd0\u884c\u6d4b\u8bd5: \u76f8\u673a\u9a71\u52a8\u6d4b\u8bd5", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:07.573540Z"}
+{"event": "\u5f00\u59cb\u6d4b\u8bd5\u76f8\u673a\u9a71\u52a8", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:07.573670Z"}
+{"rgb_id": 0, "depth_id": 1, "event": "\u521d\u59cb\u5316DABAI DC W2\u76f8\u673a", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:07.573875Z"}
+{"event": "\u65e0\u6cd5\u6253\u5f00\u6df1\u5ea6\u76f8\u673a 1\uff0c\u5c1d\u8bd5\u5176\u4ed6\u65b9\u5f0f", "logger": "vision.camera", "level": "warning", "timestamp": "2025-09-15T14:14:07.917740Z"}
+{"rgb_size": [1920, 1080], "depth_size": [640, 480], "fps": 30, "event": "DABAI DC W2\u76f8\u673a\u521d\u59cb\u5316\u6210\u529f", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:07.918177Z"}
+{"info": {"status": "connected", "rgb_device_id": 0, "depth_device_id": 1, "rgb_resolution": [1920, 1080], "depth_resolution": [640, 480], "fps": 30, "current_fps": 0.0, "frame_count": 0, "has_depth_camera": false, "rgb_intrinsics": {"fx": 1400.0, "fy": 1400.0, "cx": 960.0, "cy": 540.0, "k1": 0.0, "k2": 0.0, "p1": 0.0, "p2": 0.0, "k3": 0.0}, "depth_intrinsics": null}, "event": "\u76f8\u673a\u521d\u59cb\u5316\u6210\u529f", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:07.918354Z"}
+{"event": "\u5f00\u59cb\u6570\u636e\u91c7\u96c6", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:07.918570Z"}
+{"event": "\u5f00\u59cb\u6570\u636e\u91c7\u96c6", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:07.918690Z"}
+{"event": "\u8fdb\u5165\u6570\u636e\u91c7\u96c6\u5faa\u73af", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:07.918927Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:07.952165Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:08.085834Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:08.219748Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:08.353803Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:08.487899Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:08.621865Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:08.755803Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:08.889668Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:09.023405Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:09.157205Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:09.291078Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:09.424888Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:09.558659Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:09.692459Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:09.826386Z"}
+{"event": "\u7b2c1\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:14:09.920231Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:09.960924Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:10.094874Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:10.228665Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:10.362353Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:10.496302Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:10.630007Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:10.763670Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:10.897408Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:11.031122Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:11.164737Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:11.298411Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:11.432061Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:11.565705Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:11.699391Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:11.833111Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:11.966840Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:12.100394Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:12.233964Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:12.367621Z"}
+{"event": "\u7b2c2\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:14:12.421207Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:12.501661Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:12.635333Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:12.768908Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:12.902662Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:13.036682Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:13.170607Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:13.304582Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:13.438592Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:13.572576Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:13.706577Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:13.840502Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:13.974409Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:14.108308Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:14.242249Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:14.376167Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:14.510085Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:14.643964Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:14.777870Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:14.911771Z"}
+{"event": "\u7b2c3\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:14:14.923466Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:15.046176Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:15.180078Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:15.314000Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:15.447920Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:15.581970Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:15.715879Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:15.849772Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:15.983700Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:16.117577Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:16.251475Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:16.385491Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:16.519363Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:16.653260Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:16.787168Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:16.921063Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:17.054943Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:17.188799Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:17.322643Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:17.456509Z"}
+{"event": "\u7b2c4\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:14:17.457140Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:17.590764Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:17.724644Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:17.858573Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:17.992698Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:18.126563Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:18.260453Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:18.394350Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:18.528238Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:18.662068Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:18.795882Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:18.929726Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:19.063625Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:19.197467Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:19.331333Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:19.465236Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:19.599174Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:19.733062Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:19.866932Z"}
+{"event": "\u7b2c5\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:14:19.958778Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:20.002820Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:20.136685Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:20.270590Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:14:20.404458Z"}
+{"event": "\u6e05\u7406\u76f8\u673a\u8d44\u6e90", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:20.460139Z"}
+{"event": "\u6570\u636e\u91c7\u96c6\u5faa\u73af\u88ab\u53d6\u6d88", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:20.460518Z"}
+{"event": "\u6570\u636e\u91c7\u96c6\u5df2\u505c\u6b62", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:20.460694Z"}
+{"event": "\u76f8\u673a\u8d44\u6e90\u6e05\u7406\u5b8c\u6210", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:20.618433Z"}
+{"event": "\u76f8\u673a\u9a71\u52a8\u6d4b\u8bd5\u5b8c\u6210", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:20.618834Z"}
+{"event": "\u6d4b\u8bd5 \u76f8\u673a\u9a71\u52a8\u6d4b\u8bd5 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:20.619013Z"}
+{"event": "\u8fd0\u884c\u6d4b\u8bd5: \u89c6\u89c9\u5904\u7406\u5668\u6d4b\u8bd5", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.620465Z"}
+{"event": "\u5f00\u59cb\u6d4b\u8bd5\u89c6\u89c9\u5904\u7406\u5668", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.620862Z"}
+{"event": "\u6d4b\u8bd5\u68c0\u6d4b\u6a21\u5f0f: board_only", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.621770Z"}
+{"confidence": 0.0, "processing_time": 0.029422998428344727, "has_board_state": false, "has_move": false, "event": "\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.651441Z"}
+{"event": "\u6d4b\u8bd5\u68c0\u6d4b\u6a21\u5f0f: pieces_only", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.651840Z"}
+{"confidence": 0.0, "processing_time": 2.384185791015625e-05, "has_board_state": false, "has_move": false, "event": "\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.652022Z"}
+{"event": "\u6d4b\u8bd5\u68c0\u6d4b\u6a21\u5f0f: full_detection", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.652163Z"}
+{"confidence": 0.0, "processing_time": 0.02736949920654297, "has_board_state": false, "has_move": false, "event": "\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.679701Z"}
+{"event": "\u6d4b\u8bd5\u68c0\u6d4b\u6a21\u5f0f: move_detection", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.680038Z"}
+{"confidence": 0.0, "processing_time": 2.7179718017578125e-05, "has_board_state": false, "has_move": false, "event": "\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.680218Z"}
+{"stats": {"avg_processing_time": 0.014210879802703857, "fps": 70.36861995059118, "min_processing_time": 2.384185791015625e-05, "max_processing_time": 0.029422998428344727}, "event": "\u5904\u7406\u5668\u6027\u80fd\u7edf\u8ba1", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.680370Z"}
+{"event": "\u89c6\u89c9\u5904\u7406\u5668\u6d4b\u8bd5\u5b8c\u6210", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.680509Z"}
+{"event": "\u6d4b\u8bd5 \u89c6\u89c9\u5904\u7406\u5668\u6d4b\u8bd5 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:21.680811Z"}
+{"event": "\u8fd0\u884c\u6d4b\u8bd5: \u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:22.681588Z"}
+{"event": "\u5f00\u59cb\u6d4b\u8bd5\u89c6\u89c9\u670d\u52a1", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:22.681973Z"}
+{"event": "\u521d\u59cb\u5316\u89c6\u89c9\u8bc6\u522b\u670d\u52a1", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:14:22.682199Z"}
+{"rgb_id": 0, "depth_id": 1, "event": "\u521d\u59cb\u5316DABAI DC W2\u76f8\u673a", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:22.682578Z"}
+{"event": "\u65e0\u6cd5\u6253\u5f00\u6df1\u5ea6\u76f8\u673a 1\uff0c\u5c1d\u8bd5\u5176\u4ed6\u65b9\u5f0f", "logger": "vision.camera", "level": "warning", "timestamp": "2025-09-15T14:14:22.958816Z"}
+{"rgb_size": [1920, 1080], "depth_size": [640, 480], "fps": 30, "event": "DABAI DC W2\u76f8\u673a\u521d\u59cb\u5316\u6210\u529f", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:22.959200Z"}
+{"error": "Error 111 connecting to localhost:6379. 111.", "event": "Redis\u8fde\u63a5\u5931\u8d25", "logger": "shared.utils.redis_client", "level": "error", "timestamp": "2025-09-15T14:14:22.967793Z"}
+{"error": "Error 111 connecting to localhost:6379. 111.", "event": "\u89c6\u89c9\u8bc6\u522b\u670d\u52a1\u521d\u59cb\u5316\u5931\u8d25", "logger": "vision.service", "level": "error", "timestamp": "2025-09-15T14:14:22.968066Z"}
+{"event": "\u6e05\u7406\u89c6\u89c9\u8bc6\u522b\u670d\u52a1\u8d44\u6e90", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:14:22.968244Z"}
+{"event": "\u6e05\u7406\u76f8\u673a\u8d44\u6e90", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:22.968382Z"}
+{"event": "\u6570\u636e\u91c7\u96c6\u5df2\u505c\u6b62", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:22.968503Z"}
+{"event": "\u76f8\u673a\u8d44\u6e90\u6e05\u7406\u5b8c\u6210", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:14:23.372551Z"}
+{"event": "Redis\u8fde\u63a5\u5df2\u5173\u95ed", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:14:23.372985Z"}
+{"event": "\u89c6\u89c9\u8bc6\u522b\u670d\u52a1\u8d44\u6e90\u6e05\u7406\u5b8c\u6210", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:14:23.373156Z"}
+{"event": "\u89c6\u89c9\u670d\u52a1\u521d\u59cb\u5316\u5931\u8d25\uff0c\u53ef\u80fd\u662f\u56e0\u4e3aRedis\u672a\u8fd0\u884c\u6216\u76f8\u673a\u672a\u8fde\u63a5", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:14:23.373322Z"}
+{"event": "\u6d4b\u8bd5 \u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5 \u5931\u8d25", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:23.373485Z"}
+{"event": "\u6d4b\u8bd5\u7ed3\u679c\u6c47\u603b:", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:24.374949Z"}
+{"event": "  \u76f8\u673a\u9a71\u52a8\u6d4b\u8bd5: \u2705 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:24.375320Z"}
+{"event": "  \u89c6\u89c9\u5904\u7406\u5668\u6d4b\u8bd5: \u2705 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:24.375456Z"}
+{"event": "  \u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5: \u274c \u5931\u8d25", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:24.375604Z"}
+{"event": "\u6d4b\u8bd5\u5b8c\u6210: 2/3 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:14:24.375726Z"}
+{"event": "\u26a0\ufe0f \u90e8\u5206\u6d4b\u8bd5\u5931\u8d25", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:14:24.375836Z"}
+{"service": "vision_test", "level": "info", "event": "\u65e5\u5fd7\u7cfb\u7edf\u521d\u59cb\u5316\u5b8c\u6210", "logger": "vision_test", "timestamp": "2025-09-15T14:19:42.734016Z"}
+{"event": "\u5f00\u59cb\u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5\u5957\u4ef6", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:42.735138Z"}
+{"event": "\u8fd0\u884c\u6d4b\u8bd5: \u76f8\u673a\u9a71\u52a8\u6d4b\u8bd5", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:42.735327Z"}
+{"event": "\u5f00\u59cb\u6d4b\u8bd5\u76f8\u673a\u9a71\u52a8", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:42.735464Z"}
+{"rgb_id": 0, "depth_id": 1, "event": "\u521d\u59cb\u5316DABAI DC W2\u76f8\u673a", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:42.735680Z"}
+{"event": "\u65e0\u6cd5\u6253\u5f00\u6df1\u5ea6\u76f8\u673a 1\uff0c\u5c1d\u8bd5\u5176\u4ed6\u65b9\u5f0f", "logger": "vision.camera", "level": "warning", "timestamp": "2025-09-15T14:19:43.088898Z"}
+{"rgb_size": [1920, 1080], "depth_size": [640, 480], "fps": 30, "event": "DABAI DC W2\u76f8\u673a\u521d\u59cb\u5316\u6210\u529f", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:43.089329Z"}
+{"info": {"status": "connected", "rgb_device_id": 0, "depth_device_id": 1, "rgb_resolution": [1920, 1080], "depth_resolution": [640, 480], "fps": 30, "current_fps": 0.0, "frame_count": 0, "has_depth_camera": false, "rgb_intrinsics": {"fx": 1400.0, "fy": 1400.0, "cx": 960.0, "cy": 540.0, "k1": 0.0, "k2": 0.0, "p1": 0.0, "p2": 0.0, "k3": 0.0}, "depth_intrinsics": null}, "event": "\u76f8\u673a\u521d\u59cb\u5316\u6210\u529f", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:43.089530Z"}
+{"event": "\u5f00\u59cb\u6570\u636e\u91c7\u96c6", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:43.089749Z"}
+{"event": "\u5f00\u59cb\u6570\u636e\u91c7\u96c6", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:43.089901Z"}
+{"event": "\u8fdb\u5165\u6570\u636e\u91c7\u96c6\u5faa\u73af", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:43.090145Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:43.123708Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:43.257537Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:43.393365Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:43.527273Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:43.661053Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:43.794904Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:43.928760Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:44.062621Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:44.196414Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:44.330214Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:44.464019Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:44.597799Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:44.731567Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:44.865400Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:44.999248Z"}
+{"event": "\u7b2c1\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:19:45.090965Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:45.134503Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:45.268252Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:45.402071Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:45.535909Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:45.669881Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:45.803675Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:45.937523Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:46.071369Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:46.205235Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:46.339107Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:46.473000Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:46.606925Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:46.740822Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:46.874669Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:47.008484Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:47.142326Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:47.276165Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:47.410023Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:47.543854Z"}
+{"event": "\u7b2c2\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:19:47.592491Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:47.679006Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:47.812766Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:47.946562Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:48.080402Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:48.214415Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:48.348248Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:48.482103Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:48.615904Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:48.749747Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:48.883581Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:49.017494Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:49.151397Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:49.285194Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:49.419000Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:49.552791Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:49.686633Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:49.820429Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:49.954156Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:50.088051Z"}
+{"event": "\u7b2c3\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:19:50.093760Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:50.222457Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:50.356298Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:50.490169Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:50.623975Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:50.757868Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:50.891672Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:51.025468Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:51.159354Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:51.293263Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:51.427308Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:51.561221Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:51.695130Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:51.828995Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:51.962906Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:52.096821Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:52.230729Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:52.364634Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:52.498547Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:52.632430Z"}
+{"event": "\u7b2c4\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:19:52.633033Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:52.766694Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:52.900588Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:53.034481Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:53.168629Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:53.302615Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:53.436556Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:53.570448Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:53.704340Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:53.838232Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:53.972138Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:54.106038Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:54.239901Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:54.373821Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:54.507700Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:54.641610Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:54.775494Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:54.909403Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:55.043337Z"}
+{"event": "\u7b2c5\u5e27\u91c7\u96c6\u8d85\u65f6", "logger": "vision_test", "level": "warning", "timestamp": "2025-09-15T14:19:55.135204Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:55.178901Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:55.312760Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:55.446696Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:55.580595Z"}
+{"event": "\u6e05\u7406\u76f8\u673a\u8d44\u6e90", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:55.636316Z"}
+{"event": "\u6570\u636e\u91c7\u96c6\u5faa\u73af\u88ab\u53d6\u6d88", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:55.636745Z"}
+{"event": "\u6570\u636e\u91c7\u96c6\u5df2\u505c\u6b62", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:55.636934Z"}
+{"event": "\u76f8\u673a\u8d44\u6e90\u6e05\u7406\u5b8c\u6210", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:55.786607Z"}
+{"event": "\u76f8\u673a\u9a71\u52a8\u6d4b\u8bd5\u5b8c\u6210", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:55.786981Z"}
+{"event": "\u6d4b\u8bd5 \u76f8\u673a\u9a71\u52a8\u6d4b\u8bd5 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:55.787135Z"}
+{"event": "\u8fd0\u884c\u6d4b\u8bd5: \u89c6\u89c9\u5904\u7406\u5668\u6d4b\u8bd5", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.788571Z"}
+{"event": "\u5f00\u59cb\u6d4b\u8bd5\u89c6\u89c9\u5904\u7406\u5668", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.788965Z"}
+{"event": "\u6d4b\u8bd5\u68c0\u6d4b\u6a21\u5f0f: board_only", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.789881Z"}
+{"confidence": 0.0, "processing_time": 0.03647351264953613, "has_board_state": false, "has_move": false, "event": "\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.826609Z"}
+{"event": "\u6d4b\u8bd5\u68c0\u6d4b\u6a21\u5f0f: pieces_only", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.826985Z"}
+{"confidence": 0.0, "processing_time": 2.5033950805664062e-05, "has_board_state": false, "has_move": false, "event": "\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.827164Z"}
+{"event": "\u6d4b\u8bd5\u68c0\u6d4b\u6a21\u5f0f: full_detection", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.827300Z"}
+{"confidence": 0.0, "processing_time": 0.02698206901550293, "has_board_state": false, "has_move": false, "event": "\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.854454Z"}
+{"event": "\u6d4b\u8bd5\u68c0\u6d4b\u6a21\u5f0f: move_detection", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.854826Z"}
+{"confidence": 0.0, "processing_time": 2.7894973754882812e-05, "has_board_state": false, "has_move": false, "event": "\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.855024Z"}
+{"stats": {"avg_processing_time": 0.015877127647399902, "fps": 62.983684593841744, "min_processing_time": 2.5033950805664062e-05, "max_processing_time": 0.03647351264953613}, "event": "\u5904\u7406\u5668\u6027\u80fd\u7edf\u8ba1", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.855206Z"}
+{"event": "\u89c6\u89c9\u5904\u7406\u5668\u6d4b\u8bd5\u5b8c\u6210", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.855342Z"}
+{"event": "\u6d4b\u8bd5 \u89c6\u89c9\u5904\u7406\u5668\u6d4b\u8bd5 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:56.855645Z"}
+{"event": "\u8fd0\u884c\u6d4b\u8bd5: \u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:57.857072Z"}
+{"event": "\u5f00\u59cb\u6d4b\u8bd5\u89c6\u89c9\u670d\u52a1", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:57.857486Z"}
+{"event": "\u521d\u59cb\u5316\u89c6\u89c9\u8bc6\u522b\u670d\u52a1", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:19:57.857717Z"}
+{"rgb_id": 0, "depth_id": 1, "event": "\u521d\u59cb\u5316DABAI DC W2\u76f8\u673a", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:57.858052Z"}
+{"event": "\u65e0\u6cd5\u6253\u5f00\u6df1\u5ea6\u76f8\u673a 1\uff0c\u5c1d\u8bd5\u5176\u4ed6\u65b9\u5f0f", "logger": "vision.camera", "level": "warning", "timestamp": "2025-09-15T14:19:58.134621Z"}
+{"rgb_size": [1920, 1080], "depth_size": [640, 480], "fps": 30, "event": "DABAI DC W2\u76f8\u673a\u521d\u59cb\u5316\u6210\u529f", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:58.135020Z"}
+{"redis_url": "redis://localhost:6379", "event": "Redis\u8fde\u63a5\u6210\u529f", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:19:58.144649Z"}
+{"event_type": "vision_mode_change", "handler": "_handle_mode_change", "event": "\u8ba2\u9605\u4e8b\u4ef6", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:19:58.144947Z"}
+{"event_type": "vision_calibrate", "handler": "_handle_calibration_request", "event": "\u8ba2\u9605\u4e8b\u4ef6", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:19:58.145089Z"}
+{"event": "\u89c6\u89c9\u8bc6\u522b\u670d\u52a1\u521d\u59cb\u5316\u6210\u529f", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:19:58.145212Z"}
+{"event": "\u89c6\u89c9\u670d\u52a1\u521d\u59cb\u5316\u6210\u529f", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:58.145327Z"}
+{"event": "\u542f\u52a8\u89c6\u89c9\u8bc6\u522b\u670d\u52a1", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:19:58.145474Z"}
+{"event": "\u5f00\u59cb\u6570\u636e\u91c7\u96c6", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:58.145623Z"}
+{"event": "\u89c6\u89c9\u8bc6\u522b\u670d\u52a1\u542f\u52a8\u6210\u529f", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:19:58.145757Z"}
+{"event": "\u89c6\u89c9\u670d\u52a1\u542f\u52a8\u6210\u529f", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:58.145863Z"}
+{"status": {"is_running": true, "detection_mode": "full_detection", "detection_count": 0, "error_count": 0, "last_detection_time": 0.0, "camera_info": {"status": "capturing", "rgb_device_id": 0, "depth_device_id": 1, "rgb_resolution": [1920, 1080], "depth_resolution": [640, 480], "fps": 30, "current_fps": 0.0, "frame_count": 0, "has_depth_camera": false, "rgb_intrinsics": {"fx": 1400.0, "fy": 1400.0, "cx": 960.0, "cy": 540.0, "k1": 0.0, "k2": 0.0, "p1": 0.0, "p2": 0.0, "k3": 0.0}, "depth_intrinsics": null}, "processor_stats": {"avg_processing_time": 0.0, "fps": 0.0}, "processing_interval": 0.1}, "event": "\u670d\u52a1\u72b6\u6001", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:19:58.146005Z"}
+{"event": "\u8fdb\u5165\u6570\u636e\u91c7\u96c6\u5faa\u73af", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:19:58.146237Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:58.179531Z"}
+{"event": "\u5f00\u59cb\u89c6\u89c9\u5904\u7406\u5faa\u73af", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:19:58.180130Z"}
+{"channel": "chess_robot:vision_mode_change", "event": "\u5f00\u59cb\u76d1\u542c\u9891\u9053", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:19:58.180529Z"}
+{"channel": "chess_robot:vision_calibrate", "event": "\u5f00\u59cb\u76d1\u542c\u9891\u9053", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:19:58.180750Z"}
+{"event": "\u4e8b\u4ef6\u76d1\u542c\u5668\u542f\u52a8", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:19:58.180871Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:58.313715Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:58.447646Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:58.581589Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:58.715558Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:58.849562Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:58.983522Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:59.117486Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:59.252764Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:59.386730Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:59.520654Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:59.654739Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:59.788703Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:19:59.922676Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:00.056669Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:00.190648Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:00.324729Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:00.458677Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:00.592657Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:00.726633Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:00.860613Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:00.994589Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:01.128497Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:01.262790Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:01.396761Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:01.530656Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:01.664617Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:01.798598Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:01.932513Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:02.066451Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:02.200452Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:02.334586Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:02.468491Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:02.602431Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:02.736391Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:02.870377Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:03.004328Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:03.138233Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:03.272689Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:03.406633Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:03.540571Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:03.674543Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:03.808528Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:03.942533Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:04.076471Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:04.210390Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:04.344521Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:04.478476Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:04.612428Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:04.746357Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:04.880340Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:05.014296Z"}
+{"event": "RGB\u5e27\u91c7\u96c6\u5931\u8d25", "logger": "vision.camera", "level": "error", "timestamp": "2025-09-15T14:20:05.148220Z"}
+{"event": "\u6536\u5230\u4e86 0 \u4e2a\u68c0\u6d4b\u7ed3\u679c", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:05.148878Z"}
+{"event": "\u6e05\u7406\u89c6\u89c9\u8bc6\u522b\u670d\u52a1\u8d44\u6e90", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:20:05.149092Z"}
+{"event": "\u505c\u6b62\u89c6\u89c9\u8bc6\u522b\u670d\u52a1", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:20:05.149226Z"}
+{"event": "\u89c6\u89c9\u5904\u7406\u5faa\u73af\u88ab\u53d6\u6d88", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:20:05.149400Z"}
+{"event": "\u4e8b\u4ef6\u76d1\u542c\u5668\u505c\u6b62", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:20:05.149557Z"}
+{"event": "\u89c6\u89c9\u8bc6\u522b\u670d\u52a1\u5df2\u505c\u6b62", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:20:05.149676Z"}
+{"event": "\u6e05\u7406\u76f8\u673a\u8d44\u6e90", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:20:05.149791Z"}
+{"event": "\u6570\u636e\u91c7\u96c6\u5faa\u73af\u88ab\u53d6\u6d88", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:20:05.149936Z"}
+{"event": "\u6570\u636e\u91c7\u96c6\u5df2\u505c\u6b62", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:20:05.150072Z"}
+{"event": "\u76f8\u673a\u8d44\u6e90\u6e05\u7406\u5b8c\u6210", "logger": "vision.camera", "level": "info", "timestamp": "2025-09-15T14:20:05.314131Z"}
+{"event": "Redis\u8fde\u63a5\u5df2\u5173\u95ed", "logger": "shared.utils.redis_client", "level": "info", "timestamp": "2025-09-15T14:20:05.314535Z"}
+{"event": "\u89c6\u89c9\u8bc6\u522b\u670d\u52a1\u8d44\u6e90\u6e05\u7406\u5b8c\u6210", "logger": "vision.service", "level": "info", "timestamp": "2025-09-15T14:20:05.314694Z"}
+{"event": "\u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5\u5b8c\u6210", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:05.314823Z"}
+{"event": "\u6d4b\u8bd5 \u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:05.314953Z"}
+{"event": "\u6d4b\u8bd5\u7ed3\u679c\u6c47\u603b:", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:06.316966Z"}
+{"event": "  \u76f8\u673a\u9a71\u52a8\u6d4b\u8bd5: \u2705 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:06.317386Z"}
+{"event": "  \u89c6\u89c9\u5904\u7406\u5668\u6d4b\u8bd5: \u2705 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:06.317545Z"}
+{"event": "  \u89c6\u89c9\u670d\u52a1\u6d4b\u8bd5: \u2705 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:06.317668Z"}
+{"event": "\u6d4b\u8bd5\u5b8c\u6210: 3/3 \u901a\u8fc7", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:06.317788Z"}
+{"event": "\ud83c\udf89 \u6240\u6709\u6d4b\u8bd5\u901a\u8fc7!", "logger": "vision_test", "level": "info", "timestamp": "2025-09-15T14:20:06.317900Z"}

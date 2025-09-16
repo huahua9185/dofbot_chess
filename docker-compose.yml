@@ -218,6 +218,115 @@ services:
       - chess_robot_network
     command: npm start
 
+  # 标定服务
+  calibration-service:
+    build:
+      context: .
+      dockerfile: services/calibration_service/Dockerfile
+    container_name: chess_robot_calibration
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - "${CALIBRATION_PORT:-8002}:8002"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - CAMERA_DEVICE=${CAMERA_DEVICE:-/dev/video0}
+      - SERIAL_PORT=${SERIAL_PORT:-/dev/ttyACM0}
+    volumes:
+      - ./services/calibration_service:/app
+      - ./shared:/app/shared
+      - ./data/calibration:/app/data/calibration
+      - /dev:/dev
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/ttyACM0:/dev/ttyACM0
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python calibration_service.py
+    profiles:
+      - hardware
+
+  # 安全服务
+  security-service:
+    build:
+      context: .
+      dockerfile: services/security_service/Dockerfile
+    container_name: chess_robot_security
+    restart: unless-stopped
+    ports:
+      - "${SECURITY_SERVICE_PORT:-8007}:8007"
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=${MONGODB_DATABASE:-chess_robot}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-ChessRobot2024SuperSecretJWTKey}
+    volumes:
+      - ./services/security_service:/app
+      - ./shared:/app/shared
+      - ./logs:/app/logs
+      - ./data/security:/app/data
+      - ./config/security:/app/config
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python main.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8007/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # 性能监控服务
+  performance-service:
+    build:
+      context: .
+      dockerfile: services/performance_service/Dockerfile
+    container_name: chess_robot_performance
+    restart: unless-stopped
+    ports:
+      - "${PERFORMANCE_SERVICE_PORT:-8008}:8008"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=${REDIS_DB:-0}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./services/performance_service:/app
+      - ./shared:/app/shared
+      - ./logs:/app/logs
+      - ./data/performance:/app/data
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /dev:/host/dev:ro
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    command: python main.py
+    privileged: true  # 需要访问系统资源
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8008/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
   # Redis管理界面 (可选)
   redis-insight:
     image: redislabs/redisinsight:latest

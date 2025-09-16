@@ -1,0 +1,257 @@
+# Prometheus告警规则
+# 智能象棋机器人系统监控告警
+
+groups:
+  # 系统资源告警
+  - name: system_alerts
+    rules:
+      # CPU使用率告警
+      - alert: HighCPUUsage
+        expr: (100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)) > 80
+        for: 2m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "高CPU使用率警告"
+          description: "实例 {{ $labels.instance }} CPU使用率超过80%，当前值: {{ $value }}%"
+
+      # 内存使用率告警
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 2m
+        labels:
+          severity: warning
+          service: system
+        annotations:
+          summary: "高内存使用率警告"
+          description: "实例 {{ $labels.instance }} 内存使用率超过85%，当前值: {{ $value }}%"
+
+      # 磁盘空间告警
+      - alert: LowDiskSpace
+        expr: (1 - (node_filesystem_avail_bytes{fstype!="tmpfs"} / node_filesystem_size_bytes{fstype!="tmpfs"})) * 100 > 90
+        for: 1m
+        labels:
+          severity: critical
+          service: system
+        annotations:
+          summary: "磁盘空间不足严重警告"
+          description: "实例 {{ $labels.instance }} 磁盘 {{ $labels.mountpoint }} 使用率超过90%"
+
+  # 服务可用性告警
+  - name: service_availability_alerts
+    rules:
+      # 服务下线告警
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "服务下线告警"
+          description: "服务 {{ $labels.job }} 实例 {{ $labels.instance }} 已下线"
+
+      # Web网关响应时间告警
+      - alert: WebGatewayHighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="web_gateway"}[5m])) > 2
+        for: 2m
+        labels:
+          severity: warning
+          service: web_gateway
+        annotations:
+          summary: "Web网关响应时间过长"
+          description: "Web网关95%响应时间超过2秒，当前值: {{ $value }}s"
+
+      # API错误率告警
+      - alert: HighAPIErrorRate
+        expr: (rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m])) * 100 > 5
+        for: 3m
+        labels:
+          severity: warning
+          service: api
+        annotations:
+          summary: "API错误率过高"
+          description: "API错误率超过5%，当前值: {{ $value }}%"
+
+  # 视觉服务告警
+  - name: vision_service_alerts
+    rules:
+      # 视觉处理FPS过低
+      - alert: LowVisionFPS
+        expr: chess_vision_fps < 10
+        for: 2m
+        labels:
+          severity: warning
+          service: vision_service
+        annotations:
+          summary: "视觉处理FPS过低"
+          description: "视觉处理FPS低于10，当前值: {{ $value }}"
+
+      # 棋子检测置信度过低
+      - alert: LowDetectionConfidence
+        expr: avg_over_time(chess_detection_confidence[5m]) < 0.8
+        for: 3m
+        labels:
+          severity: warning
+          service: vision_service
+        annotations:
+          summary: "棋子检测置信度过低"
+          description: "棋子检测平均置信度低于80%，当前值: {{ $value }}"
+
+      # 相机连接异常
+      - alert: CameraConnectionLost
+        expr: chess_camera_connected == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: vision_service
+        annotations:
+          summary: "相机连接丢失"
+          description: "相机连接已断开"
+
+  # 机器人服务告警
+  - name: robot_service_alerts
+    rules:
+      # 机器人响应时间过长
+      - alert: RobotHighResponseTime
+        expr: chess_robot_response_time > 5
+        for: 2m
+        labels:
+          severity: warning
+          service: robot_service
+        annotations:
+          summary: "机器人响应时间过长"
+          description: "机器人响应时间超过5秒，当前值: {{ $value }}s"
+
+      # 机器人连接断开
+      - alert: RobotDisconnected
+        expr: chess_robot_connected == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: robot_service
+        annotations:
+          summary: "机器人连接断开"
+          description: "机器人控制器连接已断开"
+
+      # 机器人定位精度异常
+      - alert: RobotPositionError
+        expr: chess_robot_position_error > 2.0
+        for: 1m
+        labels:
+          severity: warning
+          service: robot_service
+        annotations:
+          summary: "机器人定位精度异常"
+          description: "机器人定位误差超过2.0mm，当前值: {{ $value }}mm"
+
+  # AI引擎告警
+  - name: ai_service_alerts
+    rules:
+      # AI思考时间过长
+      - alert: AISlowResponse
+        expr: chess_ai_thinking_time > 30
+        for: 1m
+        labels:
+          severity: warning
+          service: ai_service
+        annotations:
+          summary: "AI思考时间过长"
+          description: "AI思考时间超过30秒，当前值: {{ $value }}s"
+
+      # AI引擎内存使用过高
+      - alert: AIHighMemoryUsage
+        expr: chess_ai_memory_usage > 500000000  # 500MB
+        for: 2m
+        labels:
+          severity: warning
+          service: ai_service
+        annotations:
+          summary: "AI引擎内存使用过高"
+          description: "AI引擎内存使用超过500MB，当前值: {{ $value }}字节"
+
+  # 数据库告警
+  - name: database_alerts
+    rules:
+      # Redis连接数过高
+      - alert: RedisHighConnections
+        expr: redis_connected_clients > 100
+        for: 2m
+        labels:
+          severity: warning
+          service: redis
+        annotations:
+          summary: "Redis连接数过高"
+          description: "Redis连接数超过100，当前值: {{ $value }}"
+
+      # Redis内存使用率过高
+      - alert: RedisHighMemoryUsage
+        expr: (redis_memory_used_bytes / redis_memory_max_bytes) * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+          service: redis
+        annotations:
+          summary: "Redis内存使用率过高"
+          description: "Redis内存使用率超过80%，当前值: {{ $value }}%"
+
+  # 游戏业务告警
+  - name: game_business_alerts
+    rules:
+      # 游戏响应时间过长
+      - alert: GameSlowResponse
+        expr: chess_game_move_processing_time > 10
+        for: 2m
+        labels:
+          severity: warning
+          service: game_manager
+        annotations:
+          summary: "游戏移动处理时间过长"
+          description: "游戏移动处理时间超过10秒，当前值: {{ $value }}s"
+
+      # 活跃游戏数过多
+      - alert: TooManyActiveGames
+        expr: chess_active_games_count > 50
+        for: 5m
+        labels:
+          severity: warning
+          service: game_manager
+        annotations:
+          summary: "活跃游戏数过多"
+          description: "活跃游戏数超过50个，当前值: {{ $value }}"
+
+      # 游戏错误率过高
+      - alert: HighGameErrorRate
+        expr: (rate(chess_game_errors_total[5m]) / rate(chess_game_operations_total[5m])) * 100 > 5
+        for: 3m
+        labels:
+          severity: warning
+          service: game_manager
+        annotations:
+          summary: "游戏错误率过高"
+          description: "游戏操作错误率超过5%，当前值: {{ $value }}%"
+
+  # 硬件设备告警
+  - name: hardware_alerts
+    rules:
+      # 设备温度过高
+      - alert: DeviceOverheating
+        expr: chess_device_temperature > 75
+        for: 2m
+        labels:
+          severity: warning
+          service: hardware
+        annotations:
+          summary: "设备温度过高"
+          description: "设备 {{ $labels.device }} 温度超过75°C，当前值: {{ $value }}°C"
+
+      # 电源电压异常
+      - alert: PowerVoltageAnomaly
+        expr: chess_power_voltage < 11.5 or chess_power_voltage > 12.5
+        for: 1m
+        labels:
+          severity: critical
+          service: hardware
+        annotations:
+          summary: "电源电压异常"
+          description: "电源电压异常，当前值: {{ $value }}V (正常范围: 11.5-12.5V)"
