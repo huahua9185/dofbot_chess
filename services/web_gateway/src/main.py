@@ -11,9 +11,15 @@ import os
 
 from shared.config.settings import get_settings
 from shared.utils.logger import get_logger
-from .api.routes import api_router, ws_router
-from .services.game_coordinator import GameCoordinator
-from .services.websocket_manager import WebSocketManager
+import sys
+from pathlib import Path
+
+# 添加项目根目录到Python路径
+sys.path.append(str(Path(__file__).parent.parent.parent))
+
+from api.routes import api_router, ws_router, initialize_services
+from services.game_coordinator import GameCoordinator
+from services.websocket_manager import WebSocketManager
 
 # 获取配置和日志
 settings = get_settings()
@@ -56,6 +62,9 @@ async def startup_event():
         if not await game_coordinator.initialize():
             logger.error("游戏协调器初始化失败")
             raise RuntimeError("游戏协调器初始化失败")
+
+        # 将初始化的服务实例传递给路由
+        initialize_services(game_coordinator, websocket_manager)
 
         # 启动WebSocket心跳检查
         asyncio.create_task(websocket_manager.start_heartbeat())

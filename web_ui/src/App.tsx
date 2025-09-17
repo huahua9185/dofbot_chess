@@ -7,12 +7,13 @@ import { Box } from '@mui/material';
 import Navbar from './components/Layout/Navbar';
 import Sidebar from './components/Layout/Sidebar';
 import GamePage from './pages/GamePage';
-import DashboardPage from './pages/DashboardPage';
+import DashboardPage from './pages/DashboardPageNew';
 import SystemPage from './pages/SystemPage';
 import CalibrationPage from './pages/CalibrationPage';
 
-import { GameProvider } from './context/GameContext';
+import { GameProvider } from './context/GameContextNew';
 import { WebSocketProvider } from './context/WebSocketContext';
+import { SystemProvider } from './context/SystemContext';
 
 const theme = createTheme({
   palette: {
@@ -59,7 +60,8 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <WebSocketProvider>
-        <GameProvider>
+        <SystemProvider>
+          <GameProvider>
           <Router>
             <Box sx={{ display: 'flex' }}>
               <Navbar onMenuClick={handleSidebarToggle} />
@@ -86,8 +88,9 @@ const App: React.FC = () => {
                 </Routes>
               </Box>
             </Box>
-          </Router>
-        </GameProvider>
+            </Router>
+          </GameProvider>
+        </SystemProvider>
       </WebSocketProvider>
     </ThemeProvider>
   );

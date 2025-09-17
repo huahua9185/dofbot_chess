@@ -6,12 +6,17 @@ import json
 from typing import Optional, Dict, Any, List
 from dataclasses import asdict
 import logging
+import sys
+from pathlib import Path
+
+# 添加项目根目录到Python路径
+sys.path.append(str(Path(__file__).parent.parent.parent.parent))
 
 from shared.models.chess_models import AIAnalysis, GameState, ChessMove
 from shared.utils.redis_client import RedisEventBus, Event
 from shared.utils.logger import get_logger
 from shared.config.settings import get_settings
-from .engine import StockfishEngine
+from ai.engine import StockfishEngine
 
 settings = get_settings()
 logger = get_logger(__name__)
@@ -56,12 +61,12 @@ class AIService:
 
     async def _setup_event_subscriptions(self):
         """设置事件订阅"""
-        await self.event_bus.subscribe("chess_robot:game_started", self._handle_game_started)
-        await self.event_bus.subscribe("chess_robot:move_made", self._handle_move_made)
-        await self.event_bus.subscribe("chess_robot:ai_move_request", self._handle_ai_move_request)
-        await self.event_bus.subscribe("chess_robot:game_state_changed", self._handle_game_state_change)
-        await self.event_bus.subscribe("chess_robot:difficulty_changed", self._handle_difficulty_change)
-        await self.event_bus.subscribe("chess_robot:analysis_request", self._handle_analysis_request)
+        self.event_bus.subscribe("chess_robot:game_started", self._handle_game_started)
+        self.event_bus.subscribe("chess_robot:move_made", self._handle_move_made)
+        self.event_bus.subscribe("chess_robot:ai_move_request", self._handle_ai_move_request)
+        self.event_bus.subscribe("chess_robot:game_state_changed", self._handle_game_state_change)
+        self.event_bus.subscribe("chess_robot:difficulty_changed", self._handle_difficulty_change)
+        self.event_bus.subscribe("chess_robot:analysis_request", self._handle_analysis_request)
         logger.info("AI服务事件订阅设置完成")
 
     async def _handle_game_started(self, event_data: Dict[str, Any]):

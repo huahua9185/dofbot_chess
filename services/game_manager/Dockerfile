@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY shared /app/shared
 
 # 复制服务代码
-COPY services/game_manager /app
+COPY services/game_manager/src /app
 
 # 创建非root用户
 RUN groupadd -r chess_robot && useradd -r -g chess_robot chess_robot
@@ -34,4 +34,4 @@ RUN chown -R chess_robot:chess_robot /app
 USER chess_robot
 
 # 启动命令
-CMD ["python", "-m", "game_manager.main"]
+CMD ["python", "/app/main.py"]

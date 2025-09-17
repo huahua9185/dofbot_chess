@@ -11,7 +11,7 @@ import redis.asyncio as redis
 from redis.asyncio import Redis
 from dataclasses import asdict
 
-from .models import Event
+from .utils.redis_client import Event
 
 
 logger = logging.getLogger(__name__)

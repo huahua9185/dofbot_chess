@@ -1,0 +1,252 @@
+version: '3.8'
+
+services:
+  # MongoDB数据库
+  mongodb:
+    image: mongo:6.0
+    container_name: chess_robot_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=chess_robot_2024
+      - MONGO_INITDB_DATABASE=chess_robot
+    volumes:
+      - mongodb_data:/data/db
+      - ./data/mongodb/logs:/var/log/mongodb
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  # Redis缓存和消息队列
+  redis:
+    image: redis:7-alpine
+    container_name: chess_robot_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --notify-keyspace-events KEA
+    volumes:
+      - redis_data:/data
+      - ./data/redis/logs:/var/log/redis
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Web网关服务
+  web-gateway:
+    image: chess-robot/web-gateway:latest
+    container_name: chess_robot_web_gateway
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=chess_robot
+      - MONGODB_USERNAME=admin
+      - MONGODB_PASSWORD=chess_robot_2024
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+      - JWT_SECRET_KEY=chess_robot_jwt_secret_2024
+      - RATE_LIMIT_ENABLED=true
+      - RATE_LIMIT_REQUESTS=100
+      - RATE_LIMIT_WINDOW=60
+    volumes:
+      - ./data/logs/web_gateway:/app/logs
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 游戏管理服务
+  game-manager:
+    image: chess-robot/game-manager:latest
+    container_name: chess_robot_game_manager
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=chess_robot
+      - MONGODB_USERNAME=admin
+      - MONGODB_PASSWORD=chess_robot_2024
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+      - GAME_SESSION_TIMEOUT=3600
+      - MAX_CONCURRENT_GAMES=10
+    volumes:
+      - ./data/logs/game_manager:/app/logs
+      - ./data/games:/app/data/games
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8001/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # AI引擎服务
+  ai-engine:
+    image: chess-robot/ai-engine:latest
+    container_name: chess_robot_ai_engine
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+      - STOCKFISH_PATH=/usr/local/bin/stockfish
+      - STOCKFISH_THREADS=2
+      - STOCKFISH_MEMORY=512
+      - AI_DIFFICULTY_LEVELS=5
+      - AI_THINKING_TIME_MIN=3
+      - AI_THINKING_TIME_MAX=10
+    volumes:
+      - ./data/logs/ai_engine:/app/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8002/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 视觉识别服务
+  vision-service:
+    image: chess-robot/vision-service:latest
+    container_name: chess_robot_vision_service
+    restart: unless-stopped
+    ports:
+      - "8003:8003"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+      - CAMERA_DEVICE=/dev/video0
+      - VISION_MODEL_PATH=/app/models
+      - CALIBRATION_DATA_PATH=/app/data/calibration
+      - DETECTION_CONFIDENCE=0.85
+      - BOARD_DETECTION_ENABLED=true
+    volumes:
+      - ./data/logs/vision_service:/app/logs
+      - ./data/models:/app/models
+      - ./data/calibration:/app/data/calibration
+      - /dev/video0:/dev/video0
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    privileged: true
+    devices:
+      - /dev/video0:/dev/video0
+    healthcheck:
+      test: ["CMD", "python", "-c", "import cv2; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # 机器人控制服务
+  robot-service:
+    image: chess-robot/robot-service:latest
+    container_name: chess_robot_robot_service
+    restart: unless-stopped
+    ports:
+      - "8004:8004"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+      - ROBOT_SERIAL_PORT=/dev/ttyUSB0
+      - ROBOT_BAUDRATE=115200
+      - ROBOT_TIMEOUT=30
+      - CALIBRATION_DATA_PATH=/app/data/calibration
+      - SAFETY_ENABLED=true
+      - MAX_MOVE_SPEED=50
+    volumes:
+      - ./data/logs/robot_service:/app/logs
+      - ./data/calibration:/app/data/calibration
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+    privileged: true
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    healthcheck:
+      test: ["CMD", "python", "-c", "import serial; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Nginx反向代理
+  nginx:
+    image: nginx:alpine
+    container_name: chess_robot_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./frontend/dist:/usr/share/nginx/html
+    depends_on:
+      - web-gateway
+    networks:
+      - chess_robot_network
+
+networks:
+  chess_robot_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  mongodb_data:
+  redis_data:

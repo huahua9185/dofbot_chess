@@ -15,12 +15,12 @@ from shared.models.chess_models import (
 from shared.utils.redis_client import RedisEventBus, Event
 from shared.utils.logger import get_logger
 from shared.config.settings import get_settings
-from ..models.api_models import (
+from models.api_models import (
     GameCreateRequest, GameCreateResponse, MoveRequest,
     GameStatusResponse, AIRequestModel, SystemStatusResponse
 )
-from ..services.game_coordinator import GameCoordinator
-from ..services.websocket_manager import WebSocketManager
+from services.game_coordinator import GameCoordinator
+from services.websocket_manager import WebSocketManager
 
 logger = get_logger(__name__)
 settings = get_settings()
@@ -30,9 +30,16 @@ security = HTTPBearer()
 api_router = APIRouter(prefix="/api/v1")
 ws_router = APIRouter()
 
-# 服务实例
-game_coordinator = GameCoordinator()
-websocket_manager = WebSocketManager()
+# 服务实例将在启动时从main模块获取
+game_coordinator = None
+websocket_manager = None
+
+
+def initialize_services(gc, wm):
+    """初始化服务实例"""
+    global game_coordinator, websocket_manager
+    game_coordinator = gc
+    websocket_manager = wm
 
 
 # 游戏管理路由
@@ -278,14 +285,43 @@ async def calibrate_vision():
 async def get_system_status():
     """获取系统状态"""
     try:
-        metrics = await game_coordinator.get_system_metrics()
+        # 直接获取系统数据，不依赖GameCoordinator状态
+        import psutil
+        import time
+
+        # CPU使用率
+        cpu_usage = psutil.cpu_percent(interval=0.1)
+
+        # 内存使用率
+        memory = psutil.virtual_memory()
+        memory_usage = memory.percent
+
+        # 磁盘使用率
+        disk = psutil.disk_usage('/')
+        disk_usage = (disk.used / disk.total) * 100
+
+        # GPU使用率（Jetson平台）
+        gpu_usage = 0.0
+        try:
+            with open('/sys/devices/gpu.0/load', 'r') as f:
+                gpu_usage = float(f.read().strip()) / 10  # Jetson GPU load in permille
+        except:
+            pass
+
+        # 系统温度（Jetson平台）
+        temperature = 0.0
+        try:
+            with open('/sys/class/thermal/thermal_zone0/temp', 'r') as f:
+                temperature = float(f.read().strip()) / 1000  # 转换为摄氏度
+        except:
+            pass
 
         return SystemStatusResponse(
-            cpu_usage=metrics.cpu_usage if metrics else 0.0,
-            memory_usage=metrics.memory_usage if metrics else 0.0,
-            disk_usage=metrics.disk_usage if metrics else 0.0,
-            gpu_usage=metrics.gpu_usage if metrics else 0.0,
-            temperature=metrics.temperature if metrics else 0.0,
+            cpu_usage=cpu_usage,
+            memory_usage=memory_usage,
+            disk_usage=disk_usage,
+            gpu_usage=gpu_usage,
+            temperature=temperature,
             services_status={
                 "vision_service": "running",
                 "robot_service": "running",
@@ -373,3 +409,21 @@ async def health_check():
             "game_coordinator": "active"
         }
     }
+
+
+# 测试端点
+@api_router.get("/test/metrics")
+async def test_metrics():
+    """测试系统指标获取"""
+    try:
+        import psutil
+        cpu = psutil.cpu_percent(interval=0.1)
+        mem = psutil.virtual_memory().percent
+        return {
+            "test": "direct_psutil",
+            "cpu": cpu,
+            "memory": mem,
+            "message": "API代码已更新"
+        }
+    except Exception as e:
+        return {"error": str(e)}

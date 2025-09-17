@@ -54,12 +54,12 @@ class GameCoordinator:
 
     async def _setup_event_subscriptions(self):
         """设置事件订阅"""
-        await self.event_bus.subscribe("chess_robot:move_made", self._handle_move_made)
-        await self.event_bus.subscribe("chess_robot:ai_move_result", self._handle_ai_move_result)
-        await self.event_bus.subscribe("chess_robot:robot_status_update", self._handle_robot_status)
-        await self.event_bus.subscribe("chess_robot:vision_detection", self._handle_vision_detection)
-        await self.event_bus.subscribe("chess_robot:system_metrics", self._handle_system_metrics)
-        await self.event_bus.subscribe("chess_robot:game_over", self._handle_game_over)
+        self.event_bus.subscribe("chess_robot:move_made", self._handle_move_made)
+        self.event_bus.subscribe("chess_robot:ai_move_result", self._handle_ai_move_result)
+        self.event_bus.subscribe("chess_robot:robot_status_update", self._handle_robot_status)
+        self.event_bus.subscribe("chess_robot:vision_detection", self._handle_vision_detection)
+        self.event_bus.subscribe("chess_robot:system_metrics", self._handle_system_metrics)
+        self.event_bus.subscribe("chess_robot:game_over", self._handle_game_over)
         logger.info("游戏协调器事件订阅设置完成")
 
     async def create_game(self, human_color: str, ai_difficulty: int,
@@ -305,7 +305,61 @@ class GameCoordinator:
 
     async def get_system_metrics(self) -> Optional[SystemMetrics]:
         """获取系统指标"""
-        return self.system_metrics
+        try:
+            # 获取真实的系统数据
+            import psutil
+            import os
+
+            # CPU使用率
+            cpu_usage = psutil.cpu_percent(interval=0.1)
+
+            # 内存使用率
+            memory = psutil.virtual_memory()
+            memory_usage = memory.percent
+
+            # 磁盘使用率
+            disk = psutil.disk_usage('/')
+            disk_usage = (disk.used / disk.total) * 100
+
+            # GPU使用率（Jetson平台）
+            gpu_usage = 0.0
+            try:
+                with open('/sys/devices/gpu.0/load', 'r') as f:
+                    gpu_usage = float(f.read().strip()) / 10  # Jetson GPU load in permille
+            except:
+                pass
+
+            # 系统温度（Jetson平台）
+            temperature = 0.0
+            try:
+                with open('/sys/class/thermal/thermal_zone0/temp', 'r') as f:
+                    temperature = float(f.read().strip()) / 1000  # 转换为摄氏度
+            except:
+                pass
+
+            # 创建系统指标对象
+            self.system_metrics = SystemMetrics(
+                timestamp=time.time(),
+                cpu_usage=cpu_usage,
+                memory_usage=memory_usage,
+                disk_usage=disk_usage,
+                gpu_usage=gpu_usage,
+                temperature=temperature
+            )
+
+            return self.system_metrics
+
+        except Exception as e:
+            logger.error(f"获取系统指标失败: {str(e)}")
+            # 返回默认值
+            return SystemMetrics(
+                timestamp=time.time(),
+                cpu_usage=0.0,
+                memory_usage=0.0,
+                disk_usage=0.0,
+                gpu_usage=0.0,
+                temperature=0.0
+            )
 
     async def get_system_logs(self, lines: int, service: Optional[str] = None) -> List[str]:
         """获取系统日志"""

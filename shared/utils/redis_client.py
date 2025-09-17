@@ -24,8 +24,17 @@ class Event:
 class RedisEventBus:
     """Redis事件总线"""
 
-    def __init__(self, redis_url: str = "redis://localhost:6379"):
-        self.redis_url = redis_url
+    def __init__(self, redis_url: Optional[str] = None):
+        # 优先使用传入的URL，然后从环境变量获取，最后使用默认值
+        import os
+        if redis_url:
+            self.redis_url = redis_url
+        else:
+            # 从环境变量读取，支持Docker网络
+            redis_host = os.getenv('REDIS_HOST', 'localhost')
+            redis_port = os.getenv('REDIS_PORT', '6379')
+            self.redis_url = f"redis://{redis_host}:{redis_port}"
+
         self.redis = None
         self.subscribers: Dict[str, List[Callable]] = {}
         self.running = False
@@ -36,9 +45,10 @@ class RedisEventBus:
             self.redis = await aioredis.from_url(self.redis_url)
             await self.redis.ping()
             logger.info("Redis连接成功", redis_url=self.redis_url)
+            return True
         except Exception as e:
             logger.error("Redis连接失败", error=str(e))
-            raise
+            return False
 
     async def disconnect(self):
         """断开Redis连接"""

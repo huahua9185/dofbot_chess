@@ -47,7 +47,7 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({ children }
   // WebSocket基础URL
   const WS_BASE = process.env.NODE_ENV === 'production'
     ? `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}`
-    : 'ws://localhost:8080';
+    : 'ws://localhost:8000';
 
   // 连接游戏WebSocket
   const connect = (newGameId?: string) => {

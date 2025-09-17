@@ -1,0 +1,110 @@
+version: '3.8'
+
+services:
+  # MongoDB数据库
+  mongodb:
+    image: mongo:6.0
+    container_name: chess_robot_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=chess_robot_2024
+      - MONGO_INITDB_DATABASE=chess_robot
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis缓存
+  redis:
+    image: redis:7-alpine
+    container_name: chess_robot_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - chess_robot_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Web网关服务
+  web-gateway:
+    image: chess-robot/web-gateway:latest
+    container_name: chess_robot_web_gateway
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=chess_robot
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+
+  # 游戏管理服务
+  game-manager:
+    image: chess-robot/game-manager:latest
+    container_name: chess_robot_game_manager
+    restart: unless-stopped
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_DATABASE=chess_robot
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+
+  # AI引擎服务
+  ai-engine:
+    image: chess-robot/ai-engine:latest
+    container_name: chess_robot_ai_engine
+    restart: unless-stopped
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+      - LOG_LEVEL=INFO
+      - STOCKFISH_PATH=/usr/local/bin/stockfish
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chess_robot_network
+
+networks:
+  chess_robot_network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  redis_data:

@@ -7,7 +7,10 @@ import re
 from typing import Optional, List, Dict, Any, Callable
 from fastapi import HTTPException, Request, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from fastapi.middleware.base import BaseHTTPMiddleware
+try:
+    from fastapi.middleware.base import BaseHTTPMiddleware
+except ImportError:
+    from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
 
 from .jwt_auth import JWTAuthenticator

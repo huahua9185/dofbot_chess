@@ -11,7 +11,7 @@ import chess.engine
 
 from shared.event_bus import EventBus
 from shared.models import Event, ServiceStatus
-from .game_state import (
+from game_state import (
     GameState, GameStateMachine, GameStatus, GameEvent,
     Player, MoveInfo
 )

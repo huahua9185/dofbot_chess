@@ -80,7 +80,7 @@ def get_logging_config(
 
     # 默认日志文件路径
     if log_file is None:
-        log_dir = "/home/jetson/prog/logs"
+        log_dir = "/app/logs"
         os.makedirs(log_dir, exist_ok=True)
         log_file = f"{log_dir}/{service_name}.log"
 

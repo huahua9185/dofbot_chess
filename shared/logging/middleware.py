@@ -7,7 +7,10 @@ import time
 import uuid
 from typing import Callable, Any
 from fastapi import Request, Response
-from fastapi.middleware.base import BaseHTTPMiddleware
+try:
+    from fastapi.middleware.base import BaseHTTPMiddleware
+except ImportError:
+    from starlette.middleware.base import BaseHTTPMiddleware
 from .config import get_logger
 from .context import LogContext
 from .metrics import log_metrics_collector

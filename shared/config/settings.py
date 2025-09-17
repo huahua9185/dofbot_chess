@@ -92,7 +92,7 @@ class WebSettings(BaseSettings):
 class LogSettings(BaseSettings):
     """日志配置"""
     level: str = Field(default="INFO", env="LOG_LEVEL")
-    dir: str = Field(default="/var/log/robot-chess", env="LOG_DIR")
+    dir: str = Field(default="/app/logs", env="LOG_DIR")
     max_size: int = Field(default=100, env="LOG_MAX_SIZE")  # MB
     backup_count: int = Field(default=5, env="LOG_BACKUP_COUNT")
 

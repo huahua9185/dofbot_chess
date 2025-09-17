@@ -1,0 +1,29 @@
+# 视觉处理核心依赖
+opencv-python==4.8.1.78
+opencv-contrib-python==4.8.1.78
+numpy==1.24.4
+scikit-image==0.22.0
+scipy==1.11.4
+Pillow==10.1.0
+
+# 深度学习框架 (暂时跳过，稍后单独安装)
+# torch==2.0.1
+# torchvision==0.15.2
+# tensorrt==8.5.3.1
+
+# 深度相机SDK相关 (暂时跳过，稍后单独安装)
+# pyrealsense2==2.54.2.5684
+# open3d==0.18.0
+
+# 图像处理工具
+imutils==0.5.4
+imageio==2.33.0
+
+# 相机标定工具
+matplotlib==3.8.2
+
+# 异步处理
+aiofiles==23.2.1
+
+# 测试依赖
+pytest-mock==3.12.0

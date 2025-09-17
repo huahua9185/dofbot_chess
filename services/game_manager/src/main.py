@@ -12,8 +12,8 @@ sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from shared.event_bus import EventBus
 from shared.config import get_config
-from shared.logging_config import setup_logging
-from .game_manager import GameManager
+from shared.logging.config import setup_logging
+from game_manager import GameManager
 
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class GameManagerService:
         """启动服务"""
         try:
             # 设置日志
-            setup_logging(self.config.logging)
+            setup_logging("game_manager", self.config.log.level)
 
             logger.info("Starting Game Manager Service...")
 
@@ -48,14 +48,16 @@ class GameManagerService:
             self.running = True
 
             # 发布服务启动事件
-            from shared.models import Event
+            from shared.utils.redis_client import Event
             await self.event_bus.publish("service.game_manager.status", Event(
-                type="service.status",
+                event_type="service.status",
                 payload={
                     "service": "game_manager",
                     "status": "running",
                     "timestamp": asyncio.get_event_loop().time()
-                }
+                },
+                source="game_manager",
+                timestamp=asyncio.get_event_loop().time()
             ))
 
             logger.info("Game Manager Service started successfully")
@@ -78,14 +80,16 @@ class GameManagerService:
 
         if self.event_bus:
             # 发布服务停止事件
-            from shared.models import Event
+            from shared.utils.redis_client import Event
             await self.event_bus.publish("service.game_manager.status", Event(
-                type="service.status",
+                event_type="service.status",
                 payload={
                     "service": "game_manager",
                     "status": "stopped",
                     "timestamp": asyncio.get_event_loop().time()
-                }
+                },
+                source="game_manager",
+                timestamp=asyncio.get_event_loop().time()
             ))
             await self.event_bus.close()
 
